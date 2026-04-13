@@ -33,12 +33,13 @@ func activeAccountsSortBeforeTightAccounts() {
 
 @Test
 func tighterFiveHourUtilizationSortsFirstInsideSameBucket() {
+    let referenceDate = Date(timeIntervalSince1970: 1_711_111_111)
     let high = AccountCardModel(
         id: 3,
         name: "high",
         state: .tight,
         currentConcurrency: 0,
-        lastUsedAt: .now,
+        lastUsedAt: referenceDate,
         fiveHourUtilization: 0.90,
         fiveHourCountdownText: "8m",
         sevenDayUtilization: 0.30,
@@ -49,7 +50,7 @@ func tighterFiveHourUtilizationSortsFirstInsideSameBucket() {
         name: "low",
         state: .tight,
         currentConcurrency: 0,
-        lastUsedAt: .now,
+        lastUsedAt: referenceDate,
         fiveHourUtilization: 0.81,
         fiveHourCountdownText: "28m",
         sevenDayUtilization: 0.50,
