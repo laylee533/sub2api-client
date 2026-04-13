@@ -33,23 +33,30 @@ func menuBarRootViewHasMeaningfulFittingHeight() {
 
 @Test
 @MainActor
-func statusItemSymbolNameRemainsStableDuringConfiguredRefreshLifecycle() {
+func statusItemIconModeRemainsStableDuringConfiguredRefreshLifecycle() {
     let model = AppModel()
-    model.siteNameInput = "demo"
-    model.baseURLInput = "https://demo.example.com"
-    model.adminTokenInput = "token"
+    let configuredSite = PersistedSite(
+        id: "demo",
+        siteName: "demo",
+        baseURLString: "https://demo.example.com",
+        adminToken: "token"
+    )
+    model.persistedSites = [configuredSite]
+    model.selectedSiteID = configuredSite.id
+    model.editingSiteID = configuredSite.id
 
-    let initialSymbol = model.statusItemSymbolName
+    let initialMode = model.statusItemIconMode
 
     model.isLoading = true
-    let loadingSymbol = model.statusItemSymbolName
+    let loadingMode = model.statusItemIconMode
 
     model.isLoading = false
     model.cards = [MockFixtures.cards[0]]
-    let loadedSymbol = model.statusItemSymbolName
+    let loadedMode = model.statusItemIconMode
 
-    #expect(initialSymbol == loadingSymbol)
-    #expect(initialSymbol == loadedSymbol)
+    #expect(initialMode == .configured)
+    #expect(initialMode == loadingMode)
+    #expect(initialMode == loadedMode)
 }
 
 @Test

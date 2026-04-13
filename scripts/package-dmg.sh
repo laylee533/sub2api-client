@@ -8,14 +8,18 @@ STAGING_DIR="$DIST_DIR/dmg-staging"
 APP_DIR="$DIST_DIR/$APP_NAME.app"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
+RESOURCES_DIR="$CONTENTS_DIR/Resources"
 BIN_PATH="$(cd "$ROOT_DIR" && swift build -c release --show-bin-path)"
 EXECUTABLE="$BIN_PATH/$APP_NAME"
 DMG_PATH="$DIST_DIR/$APP_NAME.dmg"
 
+swift "$ROOT_DIR/scripts/generate-icons.swift"
+
 rm -rf "$APP_DIR" "$STAGING_DIR" "$DMG_PATH"
-mkdir -p "$MACOS_DIR" "$STAGING_DIR"
+mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$STAGING_DIR"
 
 cp "$EXECUTABLE" "$MACOS_DIR/$APP_NAME"
+cp "$ROOT_DIR/Resources/AppIcon.icns" "$RESOURCES_DIR/$APP_NAME.icns"
 
 cat > "$CONTENTS_DIR/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -25,6 +29,8 @@ cat > "$CONTENTS_DIR/Info.plist" <<'PLIST'
   <key>CFBundleDevelopmentRegion</key>
   <string>zh_CN</string>
   <key>CFBundleExecutable</key>
+  <string>Sub2APIMonitorApp</string>
+  <key>CFBundleIconFile</key>
   <string>Sub2APIMonitorApp</string>
   <key>CFBundleIdentifier</key>
   <string>com.laylee533.sub2api-client</string>

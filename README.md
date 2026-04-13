@@ -72,9 +72,10 @@ swift build
 脚本会做这些事：
 
 1. 执行 `swift build -c release`
-2. 生成 `Sub2APIMonitorApp.app`
-3. 做 ad-hoc `codesign`
-4. 在 `dist/` 下生成 `dmg`
+2. 生成像素风 `AppIcon.icns`
+3. 生成 `Sub2APIMonitorApp.app`
+4. 做 ad-hoc `codesign`
+5. 在 `dist/` 下生成 `dmg`
 
 默认产物路径：
 

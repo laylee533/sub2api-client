@@ -43,8 +43,8 @@ final class AppModel {
         return base.sorted(by: AccountCardModel.sortForDisplay)
     }
 
-    var statusItemSymbolName: String {
-        hasConfiguration ? "chart.bar.xaxis" : "slider.horizontal.3"
+    var statusItemIconMode: StatusItemIconMode {
+        hasConfiguration ? .configured : .setup
     }
 
     var hasConfiguration: Bool {

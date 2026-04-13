@@ -13,8 +13,7 @@ struct Sub2APIMonitorApp: App {
         MenuBarExtra {
             MenuBarRootView(model: model)
         } label: {
-            Label("sub2api 监控器", systemImage: model.statusItemSymbolName)
-                .labelStyle(.iconOnly)
+            MenuBarStatusIcon(mode: model.statusItemIconMode)
         }
         .menuBarExtraStyle(.window)
     }
